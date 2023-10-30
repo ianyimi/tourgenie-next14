@@ -11,7 +11,7 @@ const Page = async () => {
     <>
       <h1 className="z-10 text-xl">Dashboard</h1>
       <p>User id: {session.user.userId}</p>
-      <p>Username: {session.user.username}</p>
+      <p>Username: {session.user.firstName}</p>
       <Form action="/api/auth/google/sign-out">
         <input type="submit" value="Sign out" />
       </Form>

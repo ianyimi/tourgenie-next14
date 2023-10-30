@@ -9,6 +9,7 @@ import "lucia/polyfill/node";
 
 import { env } from "~/env.mjs";
 import { cache } from "react";
+import { type UserAuthSession } from "app";
 
 const sql = postgres(env.DATABASE_CONNECTION_STRING);
 
@@ -43,7 +44,9 @@ export const googleAuth = google(auth, {
 
 export type Auth = typeof auth;
 
-export const getPageSession = cache(() => {
-  const authRequest = auth.handleRequest("GET", context);
-  return authRequest.validate();
-});
+export const getPageSession: () => Promise<UserAuthSession | null> = cache(
+  () => {
+    const authRequest = auth.handleRequest("GET", context);
+    return authRequest.validate();
+  },
+);
