@@ -41,6 +41,9 @@ export default async function Home() {
             {hello ? hello.greeting : "Loading tRPC query..."}
           </p>
         </div>
+        <form action="/api/auth/google" method="GET">
+          <button type="submit">Sign In w Google</button>
+        </form>
 
         <CrudShowcase />
       </div>

@@ -8,6 +8,12 @@ dependencies:
   '@legendapp/state':
     specifier: ^2.1.2
     version: 2.1.2(react@18.2.0)
+  '@lucia-auth/adapter-postgresql':
+    specifier: ^2.0.1
+    version: 2.0.1(lucia@2.7.2)(pg@8.11.3)(postgres@3.4.2)
+  '@lucia-auth/oauth':
+    specifier: ^3.3.1
+    version: 3.3.1(lucia@2.7.2)
   '@planetscale/database':
     specifier: ^1.11.0
     version: 1.11.0
@@ -35,6 +41,12 @@ dependencies:
   drizzle-zod:
     specifier: ^0.5.1
     version: 0.5.1(drizzle-orm@0.28.5)(zod@3.22.4)
+  lucia:
+    specifier: ^2.7.2
+    version: 2.7.2
+  nanoid:
+    specifier: ^5.0.2
+    version: 5.0.2
   next:
     specifier: ^13.5.4
     version: 13.5.4(react-dom@18.2.0)(react@18.2.0)
@@ -451,6 +463,31 @@ packages:
     dependencies:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  /@lucia-auth/adapter-postgresql@2.0.1(lucia@2.7.2)(pg@8.11.3)(postgres@3.4.2):
+    resolution: {integrity: sha512-HrgyCsHXEWMD3oF2vSzbqucwGR9zCNvsV5MTV/J3EkiTHskjJXRoVqIoOONeLsdBTy+nIciyoWNMAYe9LJj3tA==}
+    peerDependencies:
+      lucia: ^2.0.0
+      pg: ^8.8.0
+      postgres: ^3.3.0
+    peerDependenciesMeta:
+      pg:
+        optional: true
+      postgres:
+        optional: true
+    dependencies:
+      lucia: 2.7.2
+      pg: 8.11.3
+      postgres: 3.4.2
+    dev: false
+
+  /@lucia-auth/oauth@3.3.1(lucia@2.7.2):
+    resolution: {integrity: sha512-2fGXPRXXQ58YGpN3zzbLSTWBXU4I3URcSXF7enR4cLugUcwdtYaGRL9b92tfZPHudr5BJRrrVqcs/VTjHTrdiw==}
+    peerDependencies:
+      lucia: ^2.0.0
+    dependencies:
+      lucia: 2.7.2
     dev: false
 
   /@mapbox/jsonlint-lines-primitives@2.0.2:
@@ -2679,6 +2716,10 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
+  /lucia@2.7.2:
+    resolution: {integrity: sha512-fEsD5EW8k3JxEhp3Cor+ar3dAfSY/QAjN/gQArfxbp1bludR7zzyW6s/gmy1cuGvABASTuZxgwCyBz0Osbg6WA==}
+    dev: false
+
   /memoizee@0.4.15:
     resolution: {integrity: sha512-UBWmJpLZd5STPm7PMUlOw/TSy972M+z8gcyQ5veOnSDRREz/0bmpyTfKt3/51DhEBqCZQn1udM/5flcSPYhkdQ==}
     dependencies:
@@ -2767,6 +2808,12 @@ packages:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid@5.0.2:
+    resolution: {integrity: sha512-2ustYUX1R2rL/Br5B/FMhi8d5/QzvkJ912rBYxskcpu0myTHzSZfTr1LAS2Sm7jxRUObRrSBFoyzwAhL49aVSg==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: false
 
   /natural-compare-lite@1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}

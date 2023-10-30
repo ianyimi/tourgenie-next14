@@ -8,6 +8,27 @@
       "when": 1698700343620,
       "tag": "0000_daffy_iron_fist",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1698705399905,
+      "tag": "0001_wonderful_shaman",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1698705503400,
+      "tag": "0002_public_lilandra",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1698705683287,
+      "tag": "0003_curvy_jocasta",
+      "breakpoints": true
     }
   ]
 }

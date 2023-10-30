@@ -16,6 +16,7 @@ import {
   text,
   timestamp,
   bigint,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
@@ -52,9 +53,12 @@ export const selectTripSchema = createSelectSchema(trips);
 export const users = pgTable(tableNames.user, {
   id: text("id").notNull().primaryKey(),
   name: text("name"),
+  firstName: text("firstName"),
+  lastName: text("lastName"),
   email: text("email"),
   emailVerified: boolean("emailVerified"),
-  image: text("image"),
+  locale: varchar("locale"),
+  picture: text("picture"),
   created_at: timestamp("created_at")
     .notNull()
     .default(sql`now()`),

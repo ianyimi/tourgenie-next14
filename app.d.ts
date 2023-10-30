@@ -29,8 +29,10 @@ declare namespace Lucia {
     name: string;
     email?: string;
     picture: string;
-    email_verified?: boolean;
+    emailVerified?: boolean;
     locale: string;
+    firstName: string;
+    lastName: string;
   };
   type DatabaseSessionAttributes = {};
 }
