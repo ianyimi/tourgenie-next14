@@ -1,6 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { db } from "~/server/db";
-import { insertTripSchema, trips } from "~/server/db/schema";
+import { insertTripSchema, trips, users } from "~/server/db/schema";
 import { env } from "~/env.mjs";
 import {
   createTRPCRouter,
@@ -19,12 +19,31 @@ export const tripsRouter = createTRPCRouter({
         id: nanoid(20),
         userId: ctx.userId!,
       })
-      .returning({ insertedId: trips.id });
+      .returning({ insertedId: trips.id })
+      .then((newTrip) => newTrip[0]);
 
-    if (!newTrip[0]?.insertedId) return;
+    const userTrips = await db
+      .select({ tripIds: users.tripIds })
+      .from(users)
+      .where(eq(users.id, ctx.userId!))
+      .then((userTrips) => userTrips[0]);
+
+    if (!newTrip?.insertedId) return;
+
+    if (userTrips?.tripIds) {
+      await db
+        .update(users)
+        .set({ tripIds: [...userTrips.tripIds, newTrip.insertedId] })
+        .where(eq(users.id, ctx.userId!));
+    } else {
+      await db
+        .update(users)
+        .set({ tripIds: [newTrip.insertedId] })
+        .where(eq(users.id, ctx.userId!));
+    }
 
     return {
-      newTripId: newTrip[0].insertedId,
+      newTripId: newTrip.insertedId,
     };
   }),
   getDetailsById: protectedProcedure
@@ -67,6 +86,31 @@ export const tripsRouter = createTRPCRouter({
         .returning({ updatedId: trips.id })
         .then((updatedTrip) => updatedTrip[0]);
       if (!updatedTrip) return { message: "Trip not found" };
+      return { success: true };
+    }),
+  updatePlan: protectedProcedure
+    .input(
+      z.object({
+        tripId: z.string(),
+        purpose: z.string(),
+        plan: z.object({
+          title: z.string(),
+          location: z.string(),
+          locationCity: z.string(),
+          locationCountry: z.string(),
+          summary: z.string(),
+          startDate: z.date(),
+          endDate: z.date(),
+        }),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const updatedTrip = await db
+        .update(trips)
+        .set({ plan: input.plan })
+        .returning({ updatedId: trips.id })
+        .then((updatedTrip) => updatedTrip[0]);
+      if (!updatedTrip) return { message: "Couldn't update trip plan" };
       return { success: true };
     }),
 });

@@ -9,11 +9,21 @@ const NewTrip = observer(() => {
   const newTripButton$ = useObservable({ hover: false });
   const router = useRouter();
   const createTripMutator = api.trip.create.useMutation();
+  const utils = api.useContext();
 
   async function handleCreateNewTrip() {
-    const newTrip = await createTripMutator.mutateAsync();
-    if (!newTrip) return console.error("Failed to create new trip");
-    router.push(`/plan/${newTrip.newTripId}`);
+    await createTripMutator.mutateAsync().then(
+      async () => {
+        await utils.trip.getSummariesByUser.invalidate();
+        console.log("Successfully created new trip");
+        return { success: true };
+      },
+      () => {
+        console.error("Failed to create new trip");
+        return { message: "Failed to create new trip" };
+      },
+    );
+    // router.push(`/plan/${newTrip.newTripId}`);
   }
   return (
     <div className="container mx-auto max-w-7xl p-4 sm:p-6 lg:p-20">
@@ -30,7 +40,7 @@ const NewTrip = observer(() => {
         >
           <svg
             className={cnMerge(
-              "text-tgSecondary mx-auto h-12 w-12 transition-colors",
+              "mx-auto h-12 w-12 text-inherit transition-colors",
               newTripButton$.hover.get() && "text-tgPrimary",
             )}
             fill="none"

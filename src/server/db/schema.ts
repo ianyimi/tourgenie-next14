@@ -1,3 +1,4 @@
+import type { TripDetails } from "~/state/plan";
 import type { Destination, DestinationSummary } from "~/state/trip";
 import type { UserDetails } from "~/state/user";
 import {
@@ -41,6 +42,8 @@ export const trips = pgTable("trip", {
     onDelete: "set null",
   }),
   messageHistory: json("messageHistory").$type<Message[]>(),
+  plan: json("plan").$type<TripDetails>(),
+  purpose: text("purpose"),
 });
 export const tripRelations = relations(trips, ({ one }) => ({
   user: one(users, { fields: [trips.userId], references: [users.id] }),

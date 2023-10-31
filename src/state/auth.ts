@@ -1,14 +1,7 @@
-import { computed, observable } from "@legendapp/state";
-import {
-  configureObservablePersistence,
-  persistObservable,
-} from "@legendapp/state/persist";
+import { observable } from "@legendapp/state";
+import { persistObservable } from "@legendapp/state/persist";
 import { ObservablePersistLocalStorage } from "@legendapp/state/persist-plugins/local-storage";
-import { type ProcessedAuthServerResponse } from "amadeus/auth";
-
-configureObservablePersistence({
-  persistLocal: ObservablePersistLocalStorage,
-});
+import { type ProcessedAuthServerResponse } from "~/types/api/amadeus";
 
 export type ApiAuthState = Pick<
   ProcessedAuthServerResponse,
@@ -22,4 +15,5 @@ export const apiAuthState$ = observable<ApiAuthState>({
 
 persistObservable<ApiAuthState>(apiAuthState$, {
   local: "apiAuthState",
+  pluginLocal: ObservablePersistLocalStorage,
 });

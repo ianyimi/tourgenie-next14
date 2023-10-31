@@ -1,4 +1,3 @@
-// app/login/page.tsx
 import { getPageSession } from "~/server/auth/lucia";
 import { redirect } from "next/navigation";
 import { api } from "~/trpc/server";
@@ -15,25 +14,24 @@ const Page = async (request: NextRequest) => {
   const session = await getPageSession();
   if (session === null) return redirect("/");
   const trips = await api.trip.getSummariesByUser.query();
-  console.log(trips);
   return (
     <>
       <h1 className="z-10 text-xl">Dashboard</h1>
-      <p>User id: {session.user.userId}</p>
-      <p>Username: {session.user.firstName}</p>
+      <Suspense fallback={<FaSpinner />}>
+        <p>User id: {session.user.userId}</p>
+        <p>Username: {session.user.firstName}</p>
+      </Suspense>
       <Form action="/api/auth/google/sign-out">
         <input type="submit" value="Sign out" />
       </Form>
       <div className="">
         <div className="fixed left-0 top-0 grid max-h-full w-full grid-cols-2 overflow-y-scroll">
-          <Suspense fallback={<FaSpinner />}>
-            <div>
-              {trips.map((trip) => (
-                <TripCard key={nanoid()} trip={trip} />
-              ))}
-            </div>
-          </Suspense>
           <NewTrip />
+          <Suspense fallback={<FaSpinner />}>
+            {trips.map((trip) => (
+              <TripCard key={nanoid()} trip={trip} />
+            ))}
+          </Suspense>
         </div>
       </div>
     </>
