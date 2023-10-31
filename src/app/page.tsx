@@ -3,8 +3,8 @@ import Link from "next/link";
 import { CreatePost } from "~/app/_components/create-post";
 import { api } from "~/trpc/server";
 
-export default async function Home() {
-  const hello = await api.post.hello.query({ text: "from tRPC" });
+export default function Home() {
+  const hello = "hello";
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
@@ -51,12 +51,12 @@ export default async function Home() {
   );
 }
 
-async function CrudShowcase() {
-  const latestPost = await api.post.hello.query({ text: "hello from crud" });
+function CrudShowcase() {
+  const latestPost = "test";
 
   return (
     <div className="w-full max-w-xs">
-      {latestPost.greeting}
+      {latestPost}
       {/* <CreatePost /> */}
     </div>
   );
