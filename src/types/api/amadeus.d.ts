@@ -1,5 +1,21 @@
 import { number } from "zod";
 
+interface AuthServerResponse {
+  type: string;
+  username: string;
+  application_name: string;
+  client_id: string;
+  token_type: string;
+  access_token: string;
+  expires_in: number;
+  state: string;
+  scope: string;
+}
+
+interface ProcessedAuthServerResponse extends AuthServerResponse {
+  expires_at: number;
+}
+
 type LocationAddress = {
   category?: string;
   lines?: string[];

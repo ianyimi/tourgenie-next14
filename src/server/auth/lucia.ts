@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { lucia } from "lucia";
 import { postgres as postgresAdapter } from "@lucia-auth/adapter-postgresql";
 import { google } from "@lucia-auth/oauth/providers";

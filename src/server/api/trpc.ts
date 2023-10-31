@@ -6,12 +6,15 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC } from "@trpc/server";
+import { TRPCError, initTRPC } from "@trpc/server";
+import { type UserAuthSession } from "app";
 import { type NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { getPageSession } from "~/server/auth/lucia";
 
 import { db } from "~/server/db";
+import { env } from "~/env.mjs";
 
 /**
  * 1. CONTEXT
@@ -23,6 +26,7 @@ import { db } from "~/server/db";
 
 interface CreateContextOptions {
   headers: Headers;
+  session: UserAuthSession | null;
 }
 
 /**
@@ -37,7 +41,9 @@ interface CreateContextOptions {
  */
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
+    userId: opts.session?.user.userId,
     headers: opts.headers,
+    session: opts.session,
     db,
   };
 };
@@ -48,11 +54,13 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (opts: { req: NextRequest }) => {
+export const createTRPCContext = async (opts: { req: NextRequest }) => {
   // Fetch stuff that depends on the request
+  const session = await getPageSession();
 
   return createInnerTRPCContext({
     headers: opts.req.headers,
+    session,
   });
 };
 
@@ -100,3 +108,27 @@ export const createTRPCRouter = t.router;
  * are logged in.
  */
 export const publicProcedure = t.procedure;
+
+const isAuthed = t.middleware(async ({ ctx, next }) => {
+  if (!ctx.userId) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Not authenticated",
+    });
+  }
+  return next();
+});
+export const protectedProcedure = t.procedure.use(isAuthed);
+
+const isRestricted = t.middleware(async ({ ctx, next }) => {
+  if (env.NODE_ENV !== "development") {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Restricted to development environment only",
+    });
+  }
+  return next({
+    ctx,
+  });
+});
+export const restrictedProcedure = t.procedure.use(isRestricted);
