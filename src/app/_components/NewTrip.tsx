@@ -9,7 +9,7 @@ const NewTrip = observer(() => {
   const newTripButton$ = useObservable({ hover: false });
   const router = useRouter();
   const createTripMutator = api.trip.create.useMutation();
-  const utils = api.useContext();
+  const utils = api.useUtils();
 
   async function handleCreateNewTrip() {
     await createTripMutator.mutateAsync().then(
@@ -36,7 +36,7 @@ const NewTrip = observer(() => {
           onClick={handleCreateNewTrip}
           onMouseOver={() => newTripButton$.hover.set(true)}
           onMouseLeave={() => newTripButton$.hover.set(false)}
-          className="border-tgSecondary bg-tgBackgroundDark/50 hover:border-tgPrimary relative block h-full w-full rounded-lg border-2 border-dashed p-12 text-center transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="relative block h-full w-full rounded-lg border-2 border-dashed border-tgSecondary bg-tgBackgroundDark/50 p-12 text-center transition-colors hover:border-tgPrimary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           <svg
             className={cnMerge(
@@ -58,7 +58,7 @@ const NewTrip = observer(() => {
           </svg>
           <h3
             className={cnMerge(
-              "dark:tgBackgroundDark text-tgBackgroundLight mt-2 text-sm font-semibold transition-colors",
+              "dark:tgBackgroundDark mt-2 text-sm font-semibold text-tgBackgroundLight transition-colors",
             )}
           >
             New Trip

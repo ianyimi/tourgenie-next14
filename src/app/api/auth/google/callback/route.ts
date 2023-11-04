@@ -42,9 +42,7 @@ export const GET = async (request: NextRequest) => {
       return user;
     };
 
-    console.log("before getUser: ", googleUser);
     const user = await getUser();
-    console.log("after getUser: ", user);
     const session = await auth.createSession({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       userId: user.userId,
