@@ -25,7 +25,7 @@ const Page = async (request: NextRequest) => {
         <input type="submit" value="Sign out" />
       </Form>
       <div className="">
-        <div className="fixed left-0 top-0 grid max-h-full w-full grid-cols-2 overflow-y-scroll">
+        <div className="fixed left-0 top-0 grid max-h-full w-full grid-cols-2 gap-16 overflow-y-scroll">
           <NewTrip />
           <Suspense fallback={<FaSpinner />}>
             {trips.map((trip) => (

@@ -26,7 +26,7 @@ const NewTrip = observer(() => {
     // router.push(`/plan/${newTrip.newTripId}`);
   }
   return (
-    <div className="container mx-auto max-w-7xl p-4 sm:p-6 lg:p-20">
+    <div>
       {/* We've used 3xl here, but feel free to try other max-widths based on your needs */}
       {/* <div className="mx-auto min-w-full pt-10 border-2 "> */}
       {/* Content goes here */}
