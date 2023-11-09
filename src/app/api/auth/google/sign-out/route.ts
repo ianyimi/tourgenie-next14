@@ -6,6 +6,7 @@ import type { NextRequest } from "next/server";
 export const POST = async (request: NextRequest) => {
   const authRequest = auth.handleRequest(request.method, context);
   // check if user is authenticated
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const session = await authRequest.validate();
   if (!session) {
     return new Response(null, {
@@ -13,6 +14,7 @@ export const POST = async (request: NextRequest) => {
     });
   }
   // make sure to invalidate the current session!
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
   await auth.invalidateSession(session.sessionId);
   // delete session cookie
   authRequest.setSession(null);

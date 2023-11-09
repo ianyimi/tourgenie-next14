@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 "use client";
 
@@ -24,9 +27,15 @@ export default function LocationMarker({
 }: CustomMarkerProps) {
   if (!location && !airportLocation) return null;
   const longitude =
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     airportLocation?.geoCode.longitude.get() ?? +location!.longitude.get();
   const latitude =
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     airportLocation?.geoCode.latitude.get() ?? +location!.latitude.get();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const name = airportLocation?.name.get() ?? location!.name.get();
   return (
     <motion.div

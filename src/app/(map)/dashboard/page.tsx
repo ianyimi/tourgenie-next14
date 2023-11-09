@@ -5,12 +5,11 @@ import { nanoid } from "nanoid";
 import { FaSpinner } from "react-icons/fa";
 import NewTrip from "~/app/_components/NewTrip";
 import TripCard from "~/app/_components/TripCard";
-import type { NextRequest } from "next/server";
 
 import Form from "~/app/_components/form";
 import { Suspense } from "react";
 
-const Page = async (request: NextRequest) => {
+export default async function Page() {
   const session = await getPageSession();
   if (session === null) return redirect("/");
   const trips = await api.trip.getSummariesByUser.query();
@@ -36,6 +35,4 @@ const Page = async (request: NextRequest) => {
       </div>
     </>
   );
-};
-
-export default Page;
+}
