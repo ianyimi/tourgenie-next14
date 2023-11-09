@@ -11,7 +11,10 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
-      const site = new NextjsSite(stack, "site", { environment: { ...env } });
+      const site = new NextjsSite(stack, "site", {
+        customDomain: "tourgenie.xyz",
+        environment: { ...env },
+      });
 
       stack.addOutputs({
         SiteUrl: site.url,
