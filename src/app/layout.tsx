@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import Providers from "./_components/ClientProviders";
+import Nav from "./_components/Nav";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,7 +27,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <TRPCReactProvider headers={headers()}>
-          <Providers>{children}</Providers>
+          <Providers>
+            <Nav />
+            {children}
+          </Providers>
         </TRPCReactProvider>
       </body>
     </html>

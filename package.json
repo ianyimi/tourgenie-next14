@@ -17,6 +17,7 @@
     "db:migrate": "tsx src/server/db/migrate"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@legendapp/state": "^2.1.2",
     "@lucia-auth/adapter-postgresql": "^2.0.1",
     "@lucia-auth/oauth": "^3.3.1",
@@ -61,8 +62,10 @@
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "autoprefixer": "^10.4.14",
+    "aws-cdk-lib": "2.101.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "constructs": "10.2.69",
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.19.13",
     "eslint": "^8.47.0",
@@ -71,14 +74,12 @@
     "postcss": "^8.4.27",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.5.1",
+    "sst": "^2.35.1",
     "tailwind-merge": "^2.0.0",
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^3.14.0",
-    "typescript": "^5.1.6",
-    "sst": "^2.35.1",
-    "aws-cdk-lib": "2.101.1",
-    "constructs": "10.2.69"
+    "typescript": "^5.1.6"
   },
   "ct3aMetadata": {
     "initVersion": "7.22.0"
