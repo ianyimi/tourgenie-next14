@@ -15,6 +15,7 @@ export default {
         customDomain: {
           domainName: "tourgenie.xyz",
           domainAlias: "www.tourgenie.xyz",
+          hostedZone: "tourgenie.xyz",
         },
         environment: { ...env },
       });
