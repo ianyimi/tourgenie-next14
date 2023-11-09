@@ -1,4 +1,5 @@
-import { SSTConfig } from "sst";
+import { env } from "~/env.mjs";
+import { type SSTConfig } from "sst";
 import { NextjsSite } from "sst/constructs";
 
 export default {
@@ -10,7 +11,7 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
-      const site = new NextjsSite(stack, "site");
+      const site = new NextjsSite(stack, "site", { environment: { ...env } });
 
       stack.addOutputs({
         SiteUrl: site.url,
