@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Dialog } from "@headlessui/react";
 import {
   observer,
@@ -36,6 +36,7 @@ const navigation = [
 const Nav = observer(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const { scrollY, scrollYProgress } = useScroll();
 
   const scrollState$ = useObservable({
@@ -77,7 +78,7 @@ const Nav = observer(() => {
           visible: { opacity: 1 },
         }}
         initial="hidden"
-        animate="visible"
+        animate={pathname === "/" ? "visible" : "hidden"}
         // style={{ scaleY: scrollYProgress.get() < 0.25 ? 1 : 0 }}
         exit={{ opacity: 0 }}
         className={cnMerge(
@@ -133,12 +134,14 @@ const Nav = observer(() => {
             <LogoIcon className="h-20 w-20" />
           </a>
           <div className="flex flex-1 justify-end">
-            <Link
-              href="/sign-in"
-              className="text-sm font-semibold leading-6 transition-colors duration-500 hover:text-tgPrimary"
-            >
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
+            <form action="/api/auth/google">
+              <button
+                type="submit"
+                className="text-sm font-semibold leading-6 transition-colors duration-500 hover:text-tgPrimary"
+              >
+                Log in <span aria-hidden="true">&rarr;</span>
+              </button>
+            </form>
             <ThemeToggle />
           </div>
         </nav>
