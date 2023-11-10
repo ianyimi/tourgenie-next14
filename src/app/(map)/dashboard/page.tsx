@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import { FaSpinner } from "react-icons/fa";
 import NewTrip from "~/app/_components/NewTrip";
 import TripCard from "~/app/_components/TripCard";
+import PageFadeInOut from "~/app/_components/hocs/PageTransititions/FadeInOut";
 
 import Form from "~/app/_components/form";
 import { Suspense } from "react";
@@ -14,7 +15,7 @@ export default async function Page() {
   if (session === null) return redirect("/");
   const trips = await api.trip.getSummariesByUser.query();
   return (
-    <>
+    <PageFadeInOut>
       <h1 className="z-10 text-xl">Dashboard</h1>
       <Suspense fallback={<FaSpinner />}>
         <p>User id: {session.user.userId}</p>
@@ -33,6 +34,6 @@ export default async function Page() {
           </Suspense>
         </div>
       </div>
-    </>
+    </PageFadeInOut>
   );
 }

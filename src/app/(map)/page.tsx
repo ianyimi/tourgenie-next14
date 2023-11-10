@@ -7,6 +7,7 @@ import { api } from "~/trpc/server";
 import { type UserAuthSession } from "app";
 import Form from "~/app/_components/form";
 import Landing from "~/app/_components/Landing";
+import PageFadeInOut from "../_components/hocs/PageTransititions/FadeInOut";
 
 export default async function Home() {
   const hello = "hello";
@@ -16,7 +17,9 @@ export default async function Home() {
 
   return (
     <main className="z-10">
-      <Landing />
+      <PageFadeInOut>
+        <Landing />
+      </PageFadeInOut>
     </main>
   );
 }
