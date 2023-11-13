@@ -1,6 +1,6 @@
 import { env } from "~/env.mjs";
 import { type SSTConfig } from "sst";
-import { NextjsSite } from "sst/constructs";
+import { NextjsSite, Api } from "sst/constructs";
 
 export default {
   config(_input) {
@@ -11,6 +11,12 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
+      const api = new Api(stack, "api", {
+        customDomain: {
+          domainName: "tourgenie.xyz",
+          hostedZone: "tourgenie.xyz",
+        },
+      });
       const site = new NextjsSite(stack, "site", {
         customDomain: {
           domainName: "tourgenie.xyz",
@@ -18,6 +24,7 @@ export default {
           hostedZone: "tourgenie.xyz",
         },
         environment: { ...env },
+        bind: [api],
       });
 
       stack.addOutputs({

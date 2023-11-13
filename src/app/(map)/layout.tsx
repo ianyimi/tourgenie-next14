@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import { MapProvider } from "react-map-gl";
 
+export const revalidate = 0;
+
 const InteractiveMap = dynamic(
   () => import("~/app/_components/InteractiveMap"),
   {

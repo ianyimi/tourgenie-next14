@@ -26,9 +26,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
          * During this re-evaluation, the `<FrozenRoute />` Component also gets updated with the new route components.
          */}
         <motion.div key={pathname}>
-          <LayoutRouterContext.Provider value={frozen}>
-            {children}
-          </LayoutRouterContext.Provider>
+          {/* <LayoutRouterContext.Provider value={frozen}> */}
+          {children}
+          {/* </LayoutRouterContext.Provider> */}
         </motion.div>
       </AnimatePresence>
     </ThemeProvider>
