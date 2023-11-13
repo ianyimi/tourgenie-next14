@@ -13,7 +13,7 @@ export default {
     app.stack(function Site({ stack }) {
       const api = new Api(stack, "api", {
         customDomain: {
-          domainName: "tourgenie.xyz",
+          domainName: "api.tourgenie.xyz",
           hostedZone: "tourgenie.xyz",
         },
       });
