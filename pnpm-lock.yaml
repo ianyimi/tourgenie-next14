@@ -173,8 +173,8 @@ devDependencies:
     specifier: ^0.5.1
     version: 0.5.1(prettier@3.0.0)
   sst:
-    specifier: ^2.35.1
-    version: 2.35.1(@types/react@18.2.20)(mysql2@3.6.1)(pg@8.11.3)
+    specifier: 2.36.1
+    version: 2.36.1(@types/react@18.2.20)(mysql2@3.6.1)(pg@8.11.3)
   tailwind-merge:
     specifier: ^2.0.0
     version: 2.0.0
@@ -8710,8 +8710,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /sst@2.35.1(@types/react@18.2.20)(mysql2@3.6.1)(pg@8.11.3):
-    resolution: {integrity: sha512-YLDt5STLO492Cjkh8c+2fqZ5/YonQla2vTY/gNoHMgfN+CdGkmg9L0yAsdXPj72yp0qKBJwxHtgn//51HX7KhQ==}
+  /sst@2.36.1(@types/react@18.2.20)(mysql2@3.6.1)(pg@8.11.3):
+    resolution: {integrity: sha512-sEUeM3y+D2Hr9RYkcgCu/ojlBt5kbOwBldcbgLX6G1Ee0dJQh+a9emPZMG/RiC/3DtnVqERM1mxTKRVueDNbDA==}
     hasBin: true
     peerDependencies:
       '@sls-next/lambda-at-edge': ^3.7.0
